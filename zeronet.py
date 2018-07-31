@@ -5,8 +5,8 @@ import os
 import sys
 
 
-def main():
-    if "--silent" not in sys.argv:
+def main(argv):
+    if "--silent" not in argv:
         print "- Starting ZeroNet..."
 
     main = None
@@ -49,8 +49,13 @@ def main():
         except Exception, log_err:
             print "Failed to log error:", log_err
             traceback.print_exc()
-        from Config import config
-        traceback.print_exc(file=open(config.log_dir + "/error.log", "a"))
+        import Config
+        try:
+            traceback.print_exc(file=open(Config.config.log_dir + "/error.log", "a"))
+        except AttributeError:
+            config_main(argv)
+            config = Config(argv)
+            traceback.print_exc(file=open("error.log", "a"))
 
     if main and (main.update_after_shutdown or main.restart_after_shutdown):  # Updater
         import atexit
@@ -84,5 +89,9 @@ def main():
         print "Bye."
 
 
+def run():
+    main(sys.argv)
+
+
 if __name__ == '__main__':
-    main()
+    run()
