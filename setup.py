@@ -12,8 +12,18 @@ setup(
         'gevent>=1.1.0',
         'msgpack>=0.4.4',
     ],
+    extras_require={
+        'test': [
+            'codecov>=2.0.15',
+            'coveralls>=1.3.0',
+            'mock>=2.0.0',
+            'pytest-cov>=2.5.1',
+            'pytest>=3.7.0',
+            'selenium>=3.13.0',
+        ],
+    },
     package_dir={"": "src"},
-    packages=find_packages(where="src", exclude=('src/Test', )),
+    packages=find_packages(where="src"),
     include_package_data=True,
     zip_safe=False,
     classifiers=[
@@ -24,7 +34,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'zeronet = zeronet.__main__:main',
+            'zeronet = zeronet.zeronet:main',
         ],
     }
 )
