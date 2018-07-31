@@ -510,4 +510,14 @@ class Config(object):
 
         return info
 
-config = Config(sys.argv)
+
+config = None
+
+
+def main(argv):
+    global config
+    config = Config(sys.argv)
+
+
+if __name__ == '__main__':
+    main(sys.argv)
