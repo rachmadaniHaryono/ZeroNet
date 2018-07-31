@@ -34,7 +34,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'zeronet = zeronet.zeronet:main',
+            'zeronet = zeronet.zeronet:run',
         ],
     }
 )
